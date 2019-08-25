@@ -17,4 +17,6 @@
  
  Smooth movement up and down slopes calculated using Trigonometric functions
  
- Player slides down slopes when the slope angle reaches above a maximum. 
+ Player slides down slopes when the slope angle reaches above a set maximum
+ 
+ All relevant values for changing player input are accessible from the inspector. 
