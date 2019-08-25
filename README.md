@@ -4,10 +4,17 @@
  The controller uses raycasting for collision detection, and the raycast sources are dependent on a BoxCollider2D object attatched to the player character. Classes are seperated based on the function that they perform.
  
  Features include:
+ 
  Collision detection using raycasts
+ 
  Jump arc calculation
+ 
  Moving platforms
+ 
  Drop through platforms
+ 
  Player velocity calculation
+ 
  Smooth movement up and down slopes calculated using Trigonometric functions
+ 
  Player slides down slopes when the slope angle reaches above a maximum. 
