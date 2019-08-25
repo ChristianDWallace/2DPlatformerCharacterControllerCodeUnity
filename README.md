@@ -3,7 +3,10 @@
  
  The controller uses raycasting for collision detection, and the raycast sources are dependent on a BoxCollider2D object attatched to the player character. Classes are seperated based on the function that they perform.
  
- Features include:
+ All relevant attributes for changing player movement are accessible from the inspector. 
+ 
+ 
+ FEATURES INCLUDE:
  
  Collision detection using raycasts
  
@@ -19,4 +22,4 @@
  
  Player slides down slopes when the slope angle reaches above a set maximum
  
- All relevant values for changing player input are accessible from the inspector. 
+
