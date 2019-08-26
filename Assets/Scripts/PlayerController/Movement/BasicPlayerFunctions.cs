@@ -5,7 +5,7 @@ public class BasicPlayerFunctions : MonoBehaviour
 { 
 
     /// <summary>
-    /// Public Value Type Fields
+    /// Value Type Fields viewable in inspector
     /// </summary>
     [Header("Movement Values")]
     [SerializeField]
@@ -27,14 +27,14 @@ public class BasicPlayerFunctions : MonoBehaviour
 
 
     /// <summary>
-    /// PRIVATE REFERENCE TYPE FIELDS
+    /// Private Reference type fields
     /// </summary>
     private IController2D _controller;
     private Vector2 _velocity;
     private Vector2 _input;
 
     /// <summary>
-    /// PRIVATE VALUE TYPE FIELDS
+    /// Private value type fields
     /// </summary>
     private float _gravity;
     private float _maxJumpVelocity,
@@ -63,28 +63,28 @@ public class BasicPlayerFunctions : MonoBehaviour
         ApplyPhysics();
     }
 
-    //SETJUMPVALUES SUMMARY
-    //_maxJumpHeight, _timeToJumpApex
-    //Want: gravity, jumpVelocity
+    /// <summary>
+    /// Use the pre defined jump height and time to jump apex values to determine the gravity and min and max jump velocity. 
+    /// </summary>
     void SetJumpValues()
     {
-        //Formula:
-        //_maxJumpHeight = (gravity * _timeToJumpApex^2)/2
-        //Rearrange the equation: 
-        // 2* _maxJumpHeight = gravity * _timeToJumpApex^2
-        // (2 * _maxJumpHeight)/ _timeToJumpApex^2
+        /*Formula:
+            _maxJumpHeight = (gravity * _timeToJumpApex^2)/2
+            Rearrange the equation: 
+            2* _maxJumpHeight = gravity * _timeToJumpApex^2
+            (2 * _maxJumpHeight)/ _timeToJumpApex^2 */
         _gravity = -(2 * _maxJumpHeight) / Mathf.Pow(_timeToJumpApex, 2);
 
-        //Formula for velocity
-        //velocityFinal = velocity Initial + acceleration * time
-        //jumpVelocity = gravity * _timeToJumpApex
+        /*Formula for velocity
+            velocityFinal = velocity Initial + acceleration * time
+            jumpVelocity = gravity * _timeToJumpApex */
         _maxJumpVelocity = Mathf.Abs(_gravity) * _timeToJumpApex;
         
-        //Final velocity ^2 = initial velocity ^2 + 2 * acceleration * displacement
-        //for jumping initial velocity is 0 so 
-        //Final velocity^2 = 2 * acceleration * displacement
-        //so
-        //minimum jump force = sqrt(2 * gravity * minJumpHeight); 
+        /*  Final velocity ^2 = initial velocity ^2 + 2 * acceleration * displacement
+            for jumping initial velocity is 0 so 
+            Final velocity^2 = 2 * acceleration * displacement
+            so
+            minimum jump force = sqrt(2 * gravity * minJumpHeight); */
         _minJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(_gravity) * _minJumpHeight);
     }
 

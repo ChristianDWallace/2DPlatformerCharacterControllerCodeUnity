@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public class PlayerInput : MonoBehaviour
 {
     public static Vector2 GetInput()

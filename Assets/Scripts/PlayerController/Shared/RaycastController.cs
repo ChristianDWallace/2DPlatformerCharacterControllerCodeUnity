@@ -4,7 +4,7 @@
 public class RaycastController : MonoBehaviour
 {
     /// <summary>
-    /// Puplic Value types
+    /// Inspector Viewable Value types
     /// </summary>
 
     [Header("Rays")]

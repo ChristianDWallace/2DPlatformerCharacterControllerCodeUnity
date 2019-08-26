@@ -3,7 +3,7 @@
 public class CameraFollow : MonoBehaviour
 {
     /// <summary>
-    /// Public Value Types
+    /// Inspector Viewable Value Types
     /// </summary>
     [SerializeField]
     private float _verticalOffset = 1f,
@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour
         _focusZoomOut = -10f;
 
     /// <summary>
-    /// Public Reference Types
+    /// Inspector Viewable Reference Types
     /// </summary>
     [SerializeField] private RaycastController _target;
 

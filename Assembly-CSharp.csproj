@@ -11,7 +11,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{4ACA62E2-C2DA-4D97-8192-6CACA8C24F79}</ProjectGuid>
+    <ProjectGuid>{5FE569EF-841B-FB16-EEF3-7BCB680F4BA4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -76,25 +76,25 @@
     <Compile Include="Assets\Scripts\PlayerController\Platforms\PlatformController.cs" />
     <Compile Include="Assets\Scripts\PlayerController\Shared\RaycastController.cs" />
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/PlatformerCharacterControllerImportTest/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/PlatformerCharacterControllerImportTest/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/PlatformerCharacterControllerImportTest/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/PlatformerCharacterControllerImportTest/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/PlatformerCharacterControllerImportTest/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/PlatformerCharacterControllerImportTest/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/PlatformerCharacterControllerImportTest/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -280,13 +280,13 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.6f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/PlatformerCharacterControllerImportTest/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/PlatformerCharacterControllerImportTest/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/PlatformerCharacterControllerImportTest/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/Users/bebe7/Desktop/Programming Projects/Games/Unity2DPlatformerToolkit/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.6f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

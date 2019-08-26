@@ -20,6 +20,12 @@ public partial class Controller2D : MonoBehaviour, IController2D
         return _collisions.IsGrounded();
     }
 
+    /// <summary>
+    /// The 
+    /// </summary>
+    /// <param name="moveDistance"></param>
+    /// <param name="input"></param>
+    /// <returns></returns>
     public Vector2 Move(Vector2 moveDistance, Vector2 input)
     {
         if (_isPlatformed)
@@ -34,12 +40,21 @@ public partial class Controller2D : MonoBehaviour, IController2D
         return moveDistance;
     }
 
+    /// <summary>
+    /// Called from platforms that our pushing our character around. 
+    /// </summary>
+    /// <param name="moveDistance"></param>
     public void SetPlatformMoveDistance(Vector2 moveDistance)
     {
         _platformMoveDistance = moveDistance;
         _isPlatformed = true; 
     }
 
+    /// <summary>
+    /// Move according to the platform move distance we recieved from the platform that is pushing us. 
+    /// </summary>
+    /// <param name="moveDistance"></param>
+    /// <returns></returns>
     private Vector2 PlatformMove(Vector2 moveDistance)
     {
         if (_isPlatformed && _platformMoveDistance != new Vector2(0f, 0f))

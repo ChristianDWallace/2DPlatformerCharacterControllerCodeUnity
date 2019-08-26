@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlatformController : MonoBehaviour
 {
     /// <summary>
-    /// Public Reference Types
+    /// Inspector Viewable Reference Types
     /// </summary>
     [Header("Collisions")]
     [SerializeField]
@@ -16,7 +16,7 @@ public class PlatformController : MonoBehaviour
     private Vector3[] _myLocalWaypoints;
 
     /// <summary>
-    /// Public Value Types
+    /// Inspector Viewable Value Types
     /// </summary>
     [SerializeField] private float _speed = 0f;
 
@@ -129,13 +129,13 @@ public class PlatformController : MonoBehaviour
         return newPos - transform.position;
     }
 
-    //EASING:
-    // y = (x^a)/(x^a + (1-x)^a)
-    //Given a value of x between 0 and 1 this equation will give us back a y
-    //value between 0 and 1
-    //but it will be eased depending on the a value.
-    //IF A = 1 we get a straight line (no acceleration factor, just steady speed)
-    //If we set it to 2 then we will accelerate between waypoints (so going fastest in the middle of our transition)
+    /*EASING:
+         y = (x^a)/(x^a + (1-x)^a)
+        Given a value of x between 0 and 1 this equation will give us back a y
+        value between 0 and 1
+        but it will be eased depending on the a value.
+        IF A = 1 we get a straight line (no acceleration factor, just steady speed)
+        If we set it to 2 then we will accelerate between waypoints (so going fastest in the middle of our transition) */
     float Ease(float x)
     {
         var a = _easing + 1;

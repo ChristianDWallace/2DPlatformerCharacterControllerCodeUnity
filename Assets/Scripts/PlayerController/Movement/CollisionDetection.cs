@@ -4,12 +4,15 @@
 public class CollisionDetection : MonoBehaviour, ICollisionDetection
 {
     /// <summary>
-    /// Public Value Type Fields
+    /// Reference type fields viewable in the inspector
     /// </summary>
     [Header("Collision Detection Raycast")]
     [SerializeField]
     private LayerMask _collisionMask;
 
+    /// <summary>
+    /// Value type fields viewable in Inspector
+    /// </summary>
     [SerializeField]
     private float _maxSlopeAngle = 80f;
 
@@ -33,7 +36,7 @@ public class CollisionDetection : MonoBehaviour, ICollisionDetection
     }
 
     /// <summary>
-    /// The public method for managing our collision detections. 
+    /// The only method that will be called outside of the collision detection class.
     /// </summary>
     /// <param name="moveDistance"></param>
     /// <returns></returns>
@@ -61,14 +64,14 @@ public class CollisionDetection : MonoBehaviour, ICollisionDetection
     }
 
     /// <summary>
-    /// Manage Horizontal Collisions
+    /// Manage Collisions along the x axis (horizontal). 
     /// </summary>
     /// <param name="moveDistance"></param>
     /// <returns></returns>
     Vector2 HorizontalCollisions(Vector2 moveDistance)
     {
         var directionX = Mathf.Sign(moveDistance.x);
-        var rayLength = Mathf.Abs(moveDistance.x) + _controller.GetSkinWidth(); //we want the overall length of the x value but we want to add skinwidth to set the ray where it should be. 
+        var rayLength = Mathf.Abs(moveDistance.x) + _controller.GetSkinWidth(); //we want the overall length of the x value so we add skinwidth to factor in the inset of the starting position of our ray. 
 
         for (int i = 0; i < _controller.HorizontalRayCount; i++)
         {
@@ -80,19 +83,19 @@ public class CollisionDetection : MonoBehaviour, ICollisionDetection
             if (hit)
             {
 
-                //If we get trapped inside of an object we want to be able to move out of it
+                //If we get trapped inside of an object we want to fignore collision detection and pass through it.
                 if (hit.distance == 0)
                 {
                     continue;
                 }
 
-                //When a raycast hits a surface it stores the angle of that surface. 
-                //For climbing slopes we want to be able to calculate the angle of the slope.
-                //To do this we use the global up (normal of the world) and the normal of the surface
-                //we are colliding with. If we collide with a surface, the difference between the global up
-                //and the surface normal is going to be equivalent to the angle of the slope we want to climb
-                //So the EQUATION IS:
-                // Slope angle = Angle(hit.normal, Vector2.up)
+                /*  When a raycast hits a surface it stores the angle of that surface. 
+                    For climbing slopes we want to be able to calculate the angle of the slope.
+                    To do this we use the global up (normal of the world) and the normal of the surface
+                    we are colliding with. If we collide with a surface, the difference between the global up
+                    and the surface normal is going to be equivalent to the angle of the slope we want to climb
+                    To calculate this we use the built in Vector method Angle:
+                    Slope angle = Angle(hit.normal, Vector2.up) */
                 var slopeAngle = Vector2.Angle(Vector2.up, hit.normal) * Mathf.Deg2Rad;
                 if (i == 0 && Mathf.Abs(slopeAngle) <= _maxSlopeAngle)
                 {
@@ -113,7 +116,6 @@ public class CollisionDetection : MonoBehaviour, ICollisionDetection
                     //If we are climbing a slope and hit something beside us. 
                     if (_collisions.ClimbingSlope)
                     {
-                        //Tan(angle) = y/x 
                         moveDistance.y = Mathf.Tan(_collisions.CurrentSlopeAngle) *
                                          Mathf.Abs(moveDistance.x);
                     }
@@ -134,19 +136,14 @@ public class CollisionDetection : MonoBehaviour, ICollisionDetection
     }
 
     /// <summary>
-    /// Handle vertical collisions so that the object collides with others.
-    ///
-    /// POTENTIAL IMPROVEMENT BY CALLING THIS FROM HORIZONTAL CODE
-    /// ADDING IN THE DIRECTION X
-    /// AND CASTING OUR RAYS FROM BOTTOM RIGHT OR TOP RIGHT ITERATING BACKWARDS BASED
-    /// ON DIRECTION
+    /// Handle collisions along the y axis (vertical). 
     /// </summary>
     /// <param name="moveDistance"></param>
     /// <returns></returns>
     Vector2 VerticalCollisions(Vector2 moveDistance, Vector2 input)
     {
         var directionY = Mathf.Sign(moveDistance.y);
-        var rayLength = Mathf.Abs(moveDistance.y) + _controller.GetSkinWidth(); //we want the overall length of the y value but we want to add skinwidth to set the ray where it should be. 
+        var rayLength = Mathf.Abs(moveDistance.y) + _controller.GetSkinWidth(); //we want the overall length of the y value so we add skin width to factor in the inset of the ray origin. 
 
         for (int i = 0; i < _controller.VerticalRayCount; i++)
         {
@@ -157,7 +154,7 @@ public class CollisionDetection : MonoBehaviour, ICollisionDetection
 
             if (hit)
             {
-                //jumping through platforms. 
+                //jumping/falling through platforms. 
                 if (hit.collider.tag == _jumpThroughTag)
                 {
                     if (directionY == 1 || hit.distance == 0)
@@ -213,8 +210,8 @@ public class CollisionDetection : MonoBehaviour, ICollisionDetection
                 Color.green);
         }
 
-        //THIS CODE PREEMPTS A BUG WE HAVE WHERE WE CLIP INTO 
-        //A piece of geometry when the angle of the slope we are climbing changes. 
+        /*  This code preempts a bug where we clip into
+            a piece of geometry when the angle of the slope we are climbing changes. */
         if (_collisions.ClimbingSlope)
         {
             moveDistance = PreemptSlopeChangeRaycast(moveDistance, rayLength);
@@ -231,25 +228,15 @@ public class CollisionDetection : MonoBehaviour, ICollisionDetection
     /// then using that distance, and the slope angle, we will calculate how high up to move on the y moveDistance.
     ///
     /// The TRIG FUNCTION for this operation functions as follows:
-    /// WHat we have: The angle of the slope and the Hypotenuse distance
-    /// What we want: The width and height of the slope Triangle.
-    /// The sin of the angle = y/hypotenuse
-    /// cosine = x/hypotenuse
-    ///
-    /// We want to solve for x and y
-    ///
-    /// so
-    ///
     /// TO FIND Y
     /// sin(angle) = y/hypotenuse
     /// multiply both sides by hypotenuse and our answer is
-    /// y = sin(angle) * hypotenuse
-    ///
+    /// y = sin(angle) * hypotenuse.
     ///
     /// TO FIND X
     /// cos(angle) = x/hypotenuse
     /// multiply both sides by hypotenuse
-    /// x = cos(angle) * hypotenuse
+    /// x = cos(angle) * hypotenuse.
     /// 
     /// </summary>
     /// <param name="moveDistance"></param>
@@ -259,8 +246,8 @@ public class CollisionDetection : MonoBehaviour, ICollisionDetection
         var hypotenuse = Mathf.Abs(moveDistance.x) / Mathf.Cos(slopeAngle);
         var climbMoveDistanceY = Mathf.Sin(slopeAngle) * hypotenuse;
 
-        //if our vertical velocity is less than the calculate velocity then we know we are not currently jumping
-        //And so we should apply the slope climb velocity.
+        /*  if our vertical velocity is less than the calculated velocity then we know we are not currently jumping
+            And so we should apply the slope climb velocity.*/
         if (moveDistance.y <= climbMoveDistanceY)
         {
             moveDistance.y = climbMoveDistanceY;
@@ -278,7 +265,7 @@ public class CollisionDetection : MonoBehaviour, ICollisionDetection
 
     /// <summary>
     /// Method for descending slope. We first check if we are moving downwards in the Collision Handling method
-    /// If we are then we send a raycast downwards to infinity to check where we will collide below. If the collision is a slope that we
+    /// If we are then we send a raycast downwards to check where we will collide below. If the collision is a slope that we
     /// are close enough to touch, and the slope x direction is the same as our x direction, then we will descend it using the same
     /// mathematical formulas as the once used in the Climb slope method. 
     /// </summary>
@@ -325,8 +312,8 @@ public class CollisionDetection : MonoBehaviour, ICollisionDetection
         RaycastHit2D maxSlopeHitRight = Physics2D.Raycast(_controller.GetRaycastOrigins().BottomRight, Vector2.down,
             Mathf.Abs(moveDistance.y) + _controller.GetSkinWidth(), CollisionMask);
 
-        //POTENTIAL BUG: If we are standing on a ledge and a slope is directly below us (within touching distance) and we change directions 
-        //We may be pulled towards the slope. 
+        /*  POTENTIAL BUG: If we are standing on a ledge and a slope is directly below us (within touching distance) and we change directions 
+            We may be pulled towards the slope. */
         if (maxSlopeHitLeft ^ maxSlopeHitRight)
         {
             moveDistance = SlideDownMaxSlope(maxSlopeHitLeft, moveDistance);
@@ -341,16 +328,15 @@ public class CollisionDetection : MonoBehaviour, ICollisionDetection
     /// <summary>
     /// We have a slope and the player falling down the slope
     /// We know the distance the player will fall
-    /// we wanna know how far we move on the x
-    ///
-    /// tan(slopeAngle) = (y - hit.distance)x
-    /// x*tan(slopeAngle) = y - hit.distance
-    ///
-    /// x = (y - hit.distance)/tan(slopeAngle);
+    /// we want to know how far we move on the x.
     /// </summary>
     /// <param name="moveDistance"></param>
     Vector2 SlideDownMaxSlope(RaycastHit2D hit, Vector2 moveDistance)
     {
+
+        /*  tan(slopeAngle) = (y - hit.distance)x
+            x*tan(slopeAngle) = y - hit.distance
+            x = (y - hit.distance)/tan(slopeAngle); */
         if (hit)
         {
             var slopeAngle = Vector2.Angle(hit.normal, Vector2.up) * Mathf.Deg2Rad;
@@ -371,7 +357,7 @@ public class CollisionDetection : MonoBehaviour, ICollisionDetection
     /// <summary>
     /// In this method we cast out a horizontal ray after having checked our vertical rays.
     /// This is so that we can see if the slope we are climbing changes its angle before our x
-    /// Actually collides with the new slope. This is because, without this raycast, we clip into the
+    /// Actually collides with the new slope. Without this raycast, we clip into the
     /// intersection between the old and new slope for a few frames. 
     /// </summary>
     /// <param name="moveDistance"></param>
